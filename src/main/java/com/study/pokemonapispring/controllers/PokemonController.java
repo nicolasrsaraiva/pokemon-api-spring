@@ -1,7 +1,7 @@
 package com.study.pokemonapispring.controllers;
 
-import com.study.pokemonapispring.dtos.PokemonDto;
 import com.study.pokemonapispring.models.Pokemon;
+import com.study.pokemonapispring.models.Type;
 import com.study.pokemonapispring.repository.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +24,15 @@ public class PokemonController {
     }
 
     @GetMapping("number/{number}")
-    public void readByNumber(@PathVariable Integer number){
-
+    public Pokemon readByNumber(@PathVariable Integer number){
+        return repository.findByNumber(number);
     }
 
     @GetMapping("type/{type}")
-    public void readByType(@PathVariable String type){
-
+    public List<Pokemon> readByType(@PathVariable String type){
+        type = type.toUpperCase();
+        Type typeEnum = Type.valueOf(type);
+        return repository.findByType(typeEnum);
     }
 
     @GetMapping
