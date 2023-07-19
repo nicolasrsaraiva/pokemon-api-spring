@@ -1,5 +1,7 @@
 package com.study.pokemonapispring.repository;
 
+import com.study.pokemonapispring.dtos.PokemonDto;
+import com.study.pokemonapispring.models.Nature;
 import com.study.pokemonapispring.models.Pokemon;
 import com.study.pokemonapispring.models.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +12,9 @@ import java.util.List;
 
 public interface PokemonRepository extends JpaRepository<Pokemon, Integer> {
 
+    @Query("SELECT p FROM Pokemon p")
+    List<Pokemon> findAllPokemons();
+
     @Query("SELECT p FROM Pokemon p WHERE p.name = :name")
     Pokemon findByName(@Param("name") String name);
 
@@ -19,5 +24,7 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Integer> {
     @Query("SELECT p FROM Pokemon p WHERE p.type = :type")
     List<Pokemon> findByType(@Param("type") Type type);
 
+    @Query("SELECT p FROM Pokemon p WHERE p.nature = :nature")
+    List<Pokemon> findByNature(@Param("nature") Nature natureEnum);
 }
 

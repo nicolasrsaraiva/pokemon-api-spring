@@ -5,11 +5,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Entity(name = "Pokemon")
 @Table(name = "pokemons")
 @Getter
 @NoArgsConstructor
 public class Pokemon {
+
     @Id
     private Integer number;
 
@@ -40,4 +42,6 @@ public class Pokemon {
         this.speed = pokemonDto.speed();
         this.nature = pokemonDto.nature();
     }
+
+
 }
